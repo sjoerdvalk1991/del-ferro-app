@@ -1,0 +1,79 @@
+<ion-view title="Resultaat" ng-controller="SingleCtrl as singleCtrl">  
+  
+  <ion-content class="has-header">
+  <div class="row text-center">
+    <div class="col">
+      <h3 class="header"><span class="">{{singleCtrl.result.day}}</span>{{singleCtrl.result.date}}</h3>
+       <p class="mtxxl text-white mbxl">
+        Heel goed, hogere score dan gisteren en je doel weer glansrijk behaald!
+      </p>
+      <div class="text-left" style="">
+      <h2 class="header text-left">Dag resultaat is: 8.5</h2>
+      <h2 class="header text-left">Behaalde punten: {{singleCtrl.result.points}}</h2>
+      <ul class=" mtxl text-white"><h2 class="header">Behaalde doelen:</h2>
+        <li><h3 class="header text-left">- {{singleCtrl.goalCount}}X {{singleCtrl.goalText}}</h3></li>
+      </ul>
+      </div>
+      
+    
+
+    </div>   
+  </div>
+
+
+  <div id="container">
+
+     <div id="bar-1" class="bar-main-container azure">
+      <div class="wrap">
+        <div class="bar-percentage" data-percentage="{{singleCtrl.stopHeight}}">{{singleCtrl.result.stop}} stops</div>
+        <div class="bar-container">
+          <div class="bar-1"></div>
+        </div>
+      </div>
+    </div>
+
+    <div id="bar-2" class="bar-main-container emerald">
+      <div class="wrap">
+        <div class="bar-percentage" data-percentage="{{singleCtrl.challengeHeight}}">{{singleCtrl.result.challenge}} uitdagingen</div>
+        <div class="bar-container">
+          <div class="bar-1"></div>
+        </div>
+      </div>
+    </div>
+
+    <div id="bar-3" class="bar-main-container violet">
+      <div class="wrap">
+        <div class="bar-percentage" data-percentage="{{singleCtrl.telephoneHeight}}">{{singleCtrl.result.telephone}} telefoontjes</div>
+        <div class="bar-container">
+          <div class="bar-1"></div>
+        </div>
+      </div>
+    </div>
+
+    <div id="bar-4" class="bar-main-container yellow">
+      <div class="wrap">
+        <div class="bar-percentage" data-percentage="{{singleCtrl.stutterHeight}}">{{singleCtrl.result.stutter}} stotters</div>
+        <div class="bar-container">
+          <div class="bar-1"></div>
+        </div>
+      </div>
+    </div>
+
+
+   </div> 
+
+  </ion-content>
+  <!-- <ion-footer-bar align-title="left" class="bar-stable">
+  <div class="row">
+    <div class="buttons col-33">
+         <ion-button class="neg-mt-5 col button white icon-left ion-chevron-left button-clear" ng-click="singleCtrl.changeDate('minus')">Vorige</ion-button>
+    </div>
+    <div class="buttons col-33 text-left">
+        <ion-button class="neg-mt-5 col button white icon ion-arrow-graph-up-right button-clear" ng-click="singleCtrl.checkChange()"></ion-button>
+    </div>
+    <div class="buttons col-33 text-left" ng-click="">
+      <ion-button class="neg-mt-5 col button white icon-right ion-chevron-right button-clear" ng-click="singleCtrl.changeDate('plus')">Volgende</ion-button>
+    </div>
+  </div>
+</ion-footer-bar> -->
+</ion-view>

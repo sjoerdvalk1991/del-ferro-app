@@ -1,0 +1,19 @@
+<ion-view title="Video's oefeningen" ng-controller="MovieCtrl as movieCtrl">  
+  <ion-nav-buttons side="left">
+    <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
+  </ion-nav-buttons>
+  <ion-content class="has-header text-center">
+  <h1 class="header mtm">De {{movieCtrl.sort}} oefening</h1>
+  	<div class="practise-content">
+  		<div ng-click="movieCtrl.showVideoPopup('action')" class="col pos-rel">
+  			<img style="width: 100%; height: auto;" src="img/delferro-oefening.jpg">
+  			<div class="video-overlay">
+  			</div>
+  			<span class="white icon ion-play playbutton"></span>
+  		</div>
+  		<div class="col text-left text-white pas">
+  			Deze oefening doe je 5 minuten staand. Je begeleid je ribben naar binnen en naar buiten tijdens het ademen. Belangrijk is dat je een krachtige windstroom maakt tijdens het uitademen en dat je door je neus inademt.
+  		</div>	
+  	</div>
+  </ion-content>
+</ion-view>

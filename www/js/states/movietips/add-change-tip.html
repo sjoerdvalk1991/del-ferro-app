@@ -1,0 +1,32 @@
+  <div class="modal">
+    <div class="bar bar-header bar-stable">
+      <ion-button class="button white icon-left ion-chevron-left button-clear" ng-click="movietipCtrl.leaveAddChangeDialog()">Terug</ion-button>
+  		<h1 class="title">Voeg tip toe</h1>
+	</div>
+    <ion-content has-header="true" class="mtxxl" >
+		<form name="form" ng-model="form" style="">
+			<ion-list class="ptxxl">
+			  <li class="item item-input item-stacked-label">
+			  	<span class="input-label">Titel</span>
+			    <input type="text" placeholder="" name="title" ng-model="title" required />					
+			  </li>
+			   <li class="item item-input item-stacked-label">
+			  	<span class="input-label">Beschrijving</span>
+			    <input type="text" placeholder="" name="description" ng-model="description" required />					
+			  </li>
+			  <li class="item item-input item-stacked-label">
+			  	<span class="input-label">Inhoud</span>
+			    <input type="text" placeholder="" name="content" ng-model="content" required />					
+			  </li>
+				<div class="row text-center">  
+					<div class="col col-70">
+						<ion-button ng-init="movieCtrl.saveEmpty(form)" class="button button-block button-positive" ng-click="movieCtrl.addItem(form)">
+				  			Tip toevoegen
+						</ion-button>
+					</div>				
+				</div>		
+			</ion-list>
+		</form>
+    </ion-content>
+    
+  </div>

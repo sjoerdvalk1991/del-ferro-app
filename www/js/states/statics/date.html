@@ -1,0 +1,15 @@
+<div class="modal">
+  <header class="bar bar-header bar-stable">
+   <ion-button class="button white icon-left ion-chevron-left button-clear" ng-click="goalsCtrl.leaveAddChangeDialog()">Terug</ion-button>
+    <h1 class="title">Kies een datum</h1>
+  </header>
+  <ion-content has-header="true">
+    <div class="padding" style="margin-top: 50px;">
+      <div pickadate ng-model="myDate"></div>
+    </div>
+    <div class="row text-center">
+    <div class="col col-40">
+    	<button class="button-block right button button-positive" ng-click="resultsCtrl.closedateModal(myDate)">Gekozen datum bekijken</button>
+    </div>
+  </ion-content>
+</div>
