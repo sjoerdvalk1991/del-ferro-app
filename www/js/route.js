@@ -54,7 +54,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
       }
     })
 
-    .state('tab.movie', {
+    .state('tab.movie-detail', {
       url:"/account/:value",
       views: {
         'tab-chats': {

@@ -59,7 +59,7 @@ var movietipController = function($scope, $state, $rootScope, $ionicModal, $ioni
   }
 
   this.stateChange = function(value){
-    $state.go('', {value: value});
+    $state.go('tab.movie-detail', {value: value});
   }
 
 
