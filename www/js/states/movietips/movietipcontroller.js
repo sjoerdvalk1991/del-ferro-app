@@ -19,6 +19,10 @@ var movietipController = function($scope, $state, $rootScope, $ionicModal, $ioni
     $scope.addDialog.remove();
   });
 
+  this.stateChange = function(value){
+    $state.go('app.movie', {value: value});
+  }
+
 
   this.loaded = function(){
     $('.all-content').fadeIn();
@@ -55,7 +59,7 @@ var movietipController = function($scope, $state, $rootScope, $ionicModal, $ioni
   }
 
   this.stateChange = function(value){
-    $state.go('.movie', {value: value});
+    $state.go('', {value: value});
   }
 
 
