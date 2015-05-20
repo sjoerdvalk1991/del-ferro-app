@@ -4,8 +4,11 @@ var staticController = function($rootScope, $scope, $state, $ionicPopup, $ionicM
   var _this = this;
   this.results = {};
   this.date = {};
+  this.goal = {};
   this.percentage = {};
   this.result = {};
+  this.goalCount = {};
+  this.reachedCount = {};
   this.notes = {};
   this.score = 0;
   this.stutter = 2;
@@ -61,7 +64,7 @@ var staticController = function($rootScope, $scope, $state, $ionicPopup, $ionicM
 
 
 
-  this.progress = function(barOne){
+  this.progress = function(){
          
     $('.bar-percentage[data-percentage]').each(function () {
       var progress = $(this);
@@ -98,10 +101,12 @@ var staticController = function($rootScope, $scope, $state, $ionicPopup, $ionicM
     if(JSON.parse(localStorage.getItem('goalAr'))){
       var goalAr = JSON.parse(localStorage.getItem('goalAr'));
       if((goalAr[goalAr.length-1].date) == _this.date){
-        if((goalAr[goalAr.length-1].goalCount) - (goalAr[goalAr.length-1].reachedCount) > 0){
-            
-
-        }
+        
+          _this.goal = goalAr[goalAr.length-1].title; 
+          _this.goalCount = goalAr[goalAr.length-1].goalCount;    
+          _this.reachedCount = goalAr[goalAr.length-1].reachedCount;
+          _this.percentage =  ((_this.reachedCount/_this.goalCount) * 100);
+          _this.progress();
 
       } 
     }
@@ -114,6 +119,7 @@ var staticController = function($rootScope, $scope, $state, $ionicPopup, $ionicM
         console.log('test');
         console.log(noteAr[noteAr.length-1].note);
         _this.notes = noteAr[noteAr.length-1].note;
+        
       }  
     }
   }
@@ -127,7 +133,6 @@ var staticController = function($rootScope, $scope, $state, $ionicPopup, $ionicM
     $('.slidy').addClass('visib');
     $('.resultintro').hide();
     _this.goalCheck();
-    _this.progress();
     _this.equalHeight();
   }
 
@@ -150,8 +155,8 @@ var staticController = function($rootScope, $scope, $state, $ionicPopup, $ionicM
 
  $rootScope.$on( "$ionicView.enter", function( scopes, states ) {
         if( states.fromCache && states.stateName == "tab.chats" ) {
-            _this.newState();
-            
+          $scope.index = '';
+          _this.newState();              
         }
     });
    
