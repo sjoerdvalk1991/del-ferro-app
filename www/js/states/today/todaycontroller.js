@@ -61,15 +61,21 @@ var todayController = function($rootScope, $scope, $state, $ionicPopup, $ionicMo
       goalAr.push(newItem);
       localStorage.setItem('goalAr', JSON.stringify(goalAr));
     }
-
-  }  
-
     $scope.addDialog.hide();
     _this.goals = JSON.parse(localStorage.getItem('goalAr'));
     _this.getGoal();
     $state.go($state.current, {}, {reload: true});
     $('.goal-isthere').show();
     $('.set-goal').hide();
+
+
+  }else{
+    $state.go($state.current, {}, {reload: true});
+    $('.goal-isthere').hide();
+    $('.set-goal').show();
+  }  
+
+    
 
 
   }
@@ -84,7 +90,7 @@ var todayController = function($rootScope, $scope, $state, $ionicPopup, $ionicMo
     newItem.reachedCount = 0;
 
     // If this is the first item it will be the default item
-    if (newItem.title.length == 0) {
+    if (newItem.title.length == null) {
       newItem.useAsDefault = true;
     } else {
       _this.leaveAddChangeDialog(newItem);
@@ -596,7 +602,12 @@ var todayController = function($rootScope, $scope, $state, $ionicPopup, $ionicMo
       width = percentage * 100;
         _this.barWidth = width;
         if(width == 100){
+          $('.goal-isthere').hide();
           this.goalCompleted(); 
+          if(!localStorage.getItem('goalReached')){
+            localStorage.setItem('goalReached', JSON.stringify(goalAr));
+            _this.goalCompleted();
+          }
         }
     }
   }
@@ -619,23 +630,21 @@ var todayController = function($rootScope, $scope, $state, $ionicPopup, $ionicMo
 
   this.goalCompleted = function(){
     console.log('test');
-    $('.goal-section').animo( {
-    animation: 'fadeOutRight', duration: 0.4}, function() {
-      $('.goal-section').hide(); 
-      $('.slide-up-part').animo( { 
-      animation: 'fadeInUp', duration: 1.0 }, function(){
-        $('.goal-10').show();
-        $('.goal-10').animo( {
+    
+    $('.goal-isthere').hide(); 
+    $('.set-goal').show();
+    $('.goal-10').show();
+    $('.goal-10').animo( {
           animation: 'fadeInUp', duration: 1.0}, function() {
             $('.goal-10').animo( { animation: 'fadeOutUpBig', duration: 1.3 }, function(){
             $('.goal-10').hide();
 
             }, addGoalPoints());
-        });
-      });    
-    });     
+        });       
   
     function addGoalPoints(){
+      var goalAr = '';
+      localStorage.setItem('goalAr', JSON.stringify(goalAr));
       $scope.$apply(function () {
         _this.points = (_this.points + 250);
       });

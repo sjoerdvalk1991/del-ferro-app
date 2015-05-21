@@ -54,15 +54,6 @@ app.config(function($stateProvider, $urlRouterProvider) {
       }
     })
 
-    .state('tab.movie-detail', {
-      url:"/account/:value",
-      views: {
-        'tab-chats': {
-          templateUrl: "js/states/movietips/movie-template.html",
-        }
-      }
-    })
-
   .state('tab.account', {
     url: '/account',
     views: {
@@ -72,6 +63,15 @@ app.config(function($stateProvider, $urlRouterProvider) {
       }
     }
   })
+
+  .state('tab.movie-detail', {
+      url:"/account/:value",
+      views: {
+        'tab-chats': {
+          templateUrl: "js/states/movietips/movie-template.html",
+        }
+      }
+    })
 
   .state('tab.start', {
     url: '/start',

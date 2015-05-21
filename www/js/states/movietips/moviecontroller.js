@@ -1,12 +1,12 @@
 var app = angular.module('movie.controller', []);
 
-var movieController = function($scope, $rootScope, $state, params, $ionicModal, $ionicViewService){
+var movieController = function($scope, $rootScope, $state, params, $ionicModal, $ionicHistory){
   var _this = this;
   this.sort = params.value;
-  this.clipSrc = '../img/coffee.MOV';
+  this.clipSrc = './img/coffee.MOV';
  
-	$ionicModal.fromTemplateUrl('js/states/movietips/video.html', function(modal) {
-	  $scope.openMovie = modal;
+	$ionicModal.fromTemplateUrl('js/states/movietips/video.html', function(video) {
+	  $scope.openMovie = video;
 	}, {
 	  scope: $scope,
 	  animation: 'slide-in-up',
@@ -24,5 +24,5 @@ var movieController = function($scope, $rootScope, $state, params, $ionicModal, 
 
 };
 
-movieController.$inject = ['$scope', '$rootScope', '$state', '$stateParams', '$ionicModal', '$ionicViewService'];
+movieController.$inject = ['$scope', '$rootScope', '$state', '$stateParams', '$ionicModal', '$ionicHistory'];
 app.controller('MovieCtrl', movieController);

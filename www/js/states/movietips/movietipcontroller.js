@@ -23,6 +23,10 @@ var movietipController = function($scope, $state, $rootScope, $ionicModal, $ioni
     $state.go('app.movie', {value: value});
   }
 
+  this.catch = function(){
+    console.log('no worry');
+  }
+
 
   this.loaded = function(){
     $('.all-content').fadeIn();

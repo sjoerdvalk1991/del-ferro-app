@@ -6,8 +6,8 @@
 	    </p>
     <div class="list card no-mt mbm">
       <div class="item item-divider">Prestaties</div>
-      	<div class="pal">Geweldig dat je bezig bent met spraak!</div>
-      <div class="item item-body border-top" ng-click="todayCtrl.increase('stoppen')">
+      	<div class="pal">Geweldig dat je bezig bent met spraak! Hieronder kun je met één druk op de knop je waardes bijhouden. Door een knop ingedrukt te houden kun je een fout herstellen.</div>
+      <div class="item item-body border-top" on-hold="todayCtrl.decrease('stoppen')" ng-click="todayCtrl.increase('stoppen')">
         <div>
 	         <div class="icon-button left ptm" style="">
 		        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Layer" x="0px" y="0px" width="30px" height="30px" viewBox="1.0 -2.0 22.0 23.0" enable-background="new 0 0 40 50" xml:space="preserve" fill="#7A7A7A">
@@ -24,7 +24,7 @@
 		    </div>
         </div>
       </div>
-      <div class="item item-body border-top" ng-click="todayCtrl.increase('uitdaging')">
+      <div class="item item-body border-top" on-hold="todayCtrl.decrease('uitdaging')" ng-click="todayCtrl.increase('uitdaging')">
       	
 			  <div class="icon-button pts" style="margin-left: -5px;">
 			    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Your_Icon" x="0px" y="0px" width="40px" height="40px" viewBox="5.0 -10.0 100.0 135.0" enable-background="new 0 0 40 40" fill="#7A7A7A" xml:space="preserve">
@@ -66,7 +66,7 @@
            
         </div>
       </div>
-      <div class="item item-body border-top-neg" ng-click="todayCtrl.increase('stotteren')">
+      <div class="item item-body border-top-neg" on-hold="todayCtrl.decrease('stotteren')" ng-click="todayCtrl.increase('stotteren')">
         <div>
         	<span class="ion-chatbubble chat"><span class="ion-close close"></span></span>
         	<div class="plxxl inline-block">
@@ -85,6 +85,11 @@
           </div>
       </div>
     </div>
+
+    	<p class="goal-10">
+        	<span class="points-stutter">250 ptn!</span>
+        	<span class="after"></span>
+     	 </p>
 
 	    <p class="ch-10">
 	      <span class="points-stutter">{{todayCtrl.challengePoint}} ptn!</span>
@@ -124,6 +129,7 @@
         </div>
 
       </div>
+
 
     </div>
   </ion-content>

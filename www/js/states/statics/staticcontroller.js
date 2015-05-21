@@ -47,14 +47,15 @@ var staticController = function($rootScope, $scope, $state, $ionicPopup, $ionicM
     console.log(index);
     switch(index) {
     case 0:
-      
+      _this.score = _this.result.points; 
     break;
     case 1:
       _this.progress();
        $('.result-score').hide();
-       _this.score = _this.result.score; 
+       _this.score = _this.result.points; 
     break;
     case 2:
+    _this.score = _this.result.points;
     $('.result-score').hide();
     $('.result-score').show();
     $('.result-score').animo( { animation: 'fadeInUp', duration: 0.8 });
@@ -94,32 +95,52 @@ var staticController = function($rootScope, $scope, $state, $ionicPopup, $ionicM
       
   this.newState = function(){
     $('.slidy').removeClass('visib');
+
     $('.resultintro').show();
   }
 
   this.goalCheck = function(){
-    if(JSON.parse(localStorage.getItem('goalAr'))){
-      var goalAr = JSON.parse(localStorage.getItem('goalAr'));
-      if((goalAr[goalAr.length-1].date) == _this.date){
-        
-          _this.goal = goalAr[goalAr.length-1].title; 
-          _this.goalCount = goalAr[goalAr.length-1].goalCount;    
-          _this.reachedCount = goalAr[goalAr.length-1].reachedCount;
+    if(JSON.parse(localStorage.getItem('goalReached'))){
+      var goalAr = JSON.parse(localStorage.getItem('goalReached'));
+      var i = 0;
+      var j = 0;
+      for (; i < goalAr.length; i++) {
+        if(goalAr[i].date == _this.date){
+           $('.no-goal-text').hide();
+           $('.goal-is').show();
+          _this.goal = goalAr[i].title; 
+          _this.goalCount = goalAr[i].goalCount;    
+          _this.reachedCount = goalAr[i].reachedCount;
           _this.percentage =  ((_this.reachedCount/_this.goalCount) * 100);
           _this.progress();
+        }else{
+          $('.goal-is').hide();
+          $('.no-goal-text').show();
+        }
 
       } 
+      if(j === goalAr.length){
+        console.log('text');
+        
+      }
+    }else{  
+      $('.goal-is').hide();
+      $('.no-goal-text').show();
     }
   }
 
   this.noteCheck = function(){
     if(JSON.parse(localStorage.getItem('noteAr'))){
       var noteAr = JSON.parse(localStorage.getItem('noteAr'));
-      if((noteAr[noteAr.length-1].date) == _this.date){
+      var i = 0;
+      for (; i < noteAr.length; i++) {
+        if(noteAr[i].date == _this.date){
         console.log('test');
-        console.log(noteAr[noteAr.length-1].note);
-        _this.notes = noteAr[noteAr.length-1].note;
-        
+        console.log(noteAr[i].note);
+        _this.notes = noteAr[i].note;
+        }else{
+          _this.notes = "Er zijn geen notities voor vandaag";
+        }
       }  
     }
   }
@@ -130,6 +151,7 @@ var staticController = function($rootScope, $scope, $state, $ionicPopup, $ionicM
     _this.stop =_this.result.stop;
     _this.challenge = _this.result.challenge;
     _this.telephone  = _this.result.telephone;
+    _this.score = _this.result.points;
     $('.slidy').addClass('visib');
     $('.resultintro').hide();
     _this.goalCheck();
