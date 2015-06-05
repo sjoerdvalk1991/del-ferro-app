@@ -47,33 +47,33 @@ var todayController = function($rootScope, $scope, $state, $ionicPopup, $ionicMo
 
   this.leaveAddChangeDialog = function(newItem) {
     
-  if(newItem != null){
+    if(newItem != null){
 
-    if(JSON.parse(localStorage.getItem('goalAr'))){
-      var goalAr = JSON.parse(localStorage.getItem('goalAr'));
-       goalAr.push(newItem);
-       localStorage.setItem('goalAr', JSON.stringify(goalAr));
+      if(JSON.parse(localStorage.getItem('goalAr'))){
+        var goalAr = JSON.parse(localStorage.getItem('goalAr'));
+         goalAr.push(newItem);
+         localStorage.setItem('goalAr', JSON.stringify(goalAr));
 
 
-      
+        
+      }else{
+        var goalAr = [];
+        goalAr.push(newItem);
+        localStorage.setItem('goalAr', JSON.stringify(goalAr));
+      }
+      $scope.addDialog.hide();
+      _this.goals = JSON.parse(localStorage.getItem('goalAr'));
+      _this.getGoal();
+      $state.go($state.current, {}, {reload: true});
+      $('.goal-isthere').show();
+      $('.set-goal').hide();
+
+
     }else{
-      var goalAr = [];
-      goalAr.push(newItem);
-      localStorage.setItem('goalAr', JSON.stringify(goalAr));
-    }
-    $scope.addDialog.hide();
-    _this.goals = JSON.parse(localStorage.getItem('goalAr'));
-    _this.getGoal();
-    $state.go($state.current, {}, {reload: true});
-    $('.goal-isthere').show();
-    $('.set-goal').hide();
-
-
-  }else{
-    $state.go($state.current, {}, {reload: true});
-    $('.goal-isthere').hide();
-    $('.set-goal').show();
-  }  
+      $state.go($state.current, {}, {reload: true});
+      $('.goal-isthere').hide();
+      $('.set-goal').show();
+    }  
 
     
 
@@ -136,6 +136,7 @@ var todayController = function($rootScope, $scope, $state, $ionicPopup, $ionicMo
       _this.stutter = dailyData.stutter;
       _this.stop = dailyData.stop;
       _this.points = dailyData.points;
+      _this.telephone = dailyData.telephone;
       _this.challenge = dailyData.challenge;
       _this.practise[0].checked = dailyData.practise;
       _this.consequent[0].checked = dailyData.consequent;
@@ -322,9 +323,6 @@ var todayController = function($rootScope, $scope, $state, $ionicPopup, $ionicMo
 
         _this.challengePoint = 0;
       }
-
-
-
 
 
     }else{

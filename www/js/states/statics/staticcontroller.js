@@ -1,6 +1,6 @@
 var app = angular.module('static.controller', ['pickadate']);
 
-var staticController = function($rootScope, $scope, $state, $ionicPopup, $ionicModal, $filter, $ionicSlideBoxDelegate, $state){
+var staticController = function($rootScope, $scope, $state, $ionicHistory, $ionicPopup, $ionicModal, $filter, $ionicSlideBoxDelegate, $state, $timeout){
   var _this = this;
   this.results = {};
   this.date = {};
@@ -23,7 +23,8 @@ var staticController = function($rootScope, $scope, $state, $ionicPopup, $ionicM
     var year = modal.substr(0, 4);
 
     var date = day+'-'+month+'-'+year;
-
+    _this.date = date;
+    localStorage.setItem('showdate', JSON.stringify(date));
     $scope.datepicker = date;
     _this.date = date;
     _this.goalCheck();
@@ -33,6 +34,7 @@ var staticController = function($rootScope, $scope, $state, $ionicPopup, $ionicM
     for (; i < _this.results.length; i++) {
       if(_this.results[i].date == date){
         _this.result = _this.results[i];
+        _this.score =  _this.results[i].points;
         console.log(_this.results[i]);
         _this.showResult();
 
@@ -43,25 +45,30 @@ var staticController = function($rootScope, $scope, $state, $ionicPopup, $ionicM
 
   };
 
-  $scope.slideChanged = function(index) {
+
+
+  this.slideChanged = function(index) {
     console.log(index);
     switch(index) {
     case 0:
-      _this.score = _this.result.points; 
+
     break;
     case 1:
       _this.progress();
        $('.result-score').hide();
-       _this.score = _this.result.points; 
+
     break;
     case 2:
-    _this.score = _this.result.points;
+
     $('.result-score').hide();
     $('.result-score').show();
+
     $('.result-score').animo( { animation: 'fadeInUp', duration: 0.8 });
     break;
     }
   }
+   
+
 
 
 
@@ -154,6 +161,7 @@ var staticController = function($rootScope, $scope, $state, $ionicPopup, $ionicM
     _this.score = _this.result.points;
     $('.slidy').addClass('visib');
     $('.resultintro').hide();
+    _this.slideChanged(console.log('dd'));
     _this.goalCheck();
     _this.equalHeight();
   }
@@ -161,7 +169,7 @@ var staticController = function($rootScope, $scope, $state, $ionicPopup, $ionicM
     $rootScope.$on('getDate',function(event, args){
       var modal = args.date;
       _this.closedateModal(modal);
-      
+
     });
 
 
@@ -175,14 +183,34 @@ var staticController = function($rootScope, $scope, $state, $ionicPopup, $ionicM
     _this.results = JSON.parse(localStorage.getItem('dailyData')).reverse();
   }  
 
- $rootScope.$on( "$ionicView.enter", function( scopes, states ) {
-        if( states.fromCache && states.stateName == "tab.chats" ) {
-          $scope.index = '';
-          _this.newState();              
-        }
-    });
+
+  ($scope.clearHistory = function() {
+    $ionicHistory.clearHistory();
+    $scope.showHistory();
+
+    _this.date = JSON.parse(localStorage.getItem('showdate'));
+    _this.results = JSON.parse(localStorage.getItem('dailyData')).reverse();
+    console.log(_this.results);
+    var i = 0;
+    for (; i < _this.results.length; i++) {
+      if(_this.results[i].date == _this.date){
+          _this.result = _this.results[i];
+          _this.score =  _this.results[i].points;
+          _this.stutter = _this.results[i].stutter;
+          _this.stop = _this.results[i].stop;
+        _this.goalCheck();
+      }
+    }      
+  });
+
+ // $rootScope.$on( "$ionicView.enter", function( scopes, states ) {
+ //      if( states.fromCache && states.stateName == "tab.chats" ) {
+ //        $scope.index = '';
+ //        _this.newState();              
+ //      }
+ //  });
    
 };
 
-staticController.$inject = ['$rootScope', '$scope', '$state', '$ionicPopup', '$ionicModal', '$filter', '$ionicSlideBoxDelegate', '$state'];
+staticController.$inject = ['$rootScope', '$scope', '$state', '$ionicHistory', '$ionicPopup', '$ionicModal', '$filter', '$ionicSlideBoxDelegate', '$state'];
 app.controller('StaticCtrl', staticController);
